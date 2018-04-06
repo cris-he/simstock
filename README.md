@@ -1,9 +1,9 @@
 # simstock
 A stock game written in Angular (angular 5), Node.js, MongoDB.
 
-Try the deployed version:
+Try the deployed version (Safari is not supported):
 
-   https://cris-he.github.io/simstock/frontend
+   https://cris-he.github.io/simstock/
 
 ----
 
