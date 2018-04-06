@@ -88,7 +88,7 @@ var routes = function (User) {
                                 // console.log("goback to ", i, goback);
                             }
                             req.user.eqt_data.push(_data[goback].average);
-                            req.user.ern_data.push(_data[goback].average - _eqt.invested);
+                            req.user.ern_data.push(_data[goback].average - _eqt.was);
                         }
                         first_time = false;
                     } else {
@@ -104,7 +104,7 @@ var routes = function (User) {
                                     goback = 0;
                                 }
                                 req.user.eqt_data[i] = req.user.eqt_data[i] + _data[goback].average;
-                                req.user.ern_data[i] = req.user.ern_data[i] + _data[goback].average - _eqt.invested;
+                                req.user.ern_data[i] = req.user.ern_data[i] + _data[goback].average - _eqt.was;
                             }
                         }
                     }
