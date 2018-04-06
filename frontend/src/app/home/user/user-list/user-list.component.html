@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="ready" class="col-md-12" style="margin-top:3%">
+      <h2>{{myself.first}} {{myself.last}}</h2>
+      <h4 style="margin-top:1%">Rank : # {{my_rank}}</h4>
+
+      <div class="table-responsive" style="margin-top:3%">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Assets (Cash + Equity)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <th scope="row">{{user.rank}}</th>
+              <td>{{user.name}}</td>
+              <td>{{user.assets}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

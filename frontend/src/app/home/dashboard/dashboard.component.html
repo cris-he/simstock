@@ -1,0 +1,57 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Welcome to SimStock</h1>
+    <p>Invest your saving before it is too late.</p>
+    <p>
+      <a class="btn btn-primary btn-lg" [routerLink]="['/market']" role="button">Start Investing »</a>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" *ngIf="ready">
+      <h2>{{user.first}} {{user.last}}</h2>
+      <h4 style="margin-top:1%">Cash Available : $ {{user.cash}}</h4>
+    </div>
+    <div class="col-md-12">
+      <h5>
+        {{date | date:'yyyy-MM-dd'}}
+      </h5>
+      <div>
+        <canvas *ngIf="!good_date" id="dayChart" height="100"></canvas>
+        <div *ngIf="no_eqt" class="jumbotron">
+          <div>
+            <h1>You don't have any stock currently.</h1>
+            <p class="lead">Please go to market to purchase any.</p>
+            <p class="lead">Daily earning chart is therefore hidden.</p>
+          </div>
+        </div>
+        <div *ngIf="good_date&&!no_eqt" class="jumbotron">
+          <div>
+            <h1>Market Closed on {{date | date:'yyyy-MM-dd'}}</h1>
+            <p class="lead">It could be weekend or holidays, or market does not open yet (open after 9:30 AM).</p>
+            <p class="lead">Daily earning chart is therefore hidden.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12" style="margin-bottom:3%">
+      <h5 style="margin-top:3%">
+        {{last_year}} Revenue
+      </h5>
+      <div>
+        <div *ngIf="last_year_empty" class="jumbotron">
+          <div>
+            <h1>You don't have any profit on year {{last_year}}.</h1>
+            <p class="lead">It is kinda sad.</p>
+            <p class="lead">Last year earning chart is therefore hidden.</p>
+          </div>
+        </div>
+        <canvas id="yearChart" height="100"></canvas>        
+      </div>
+    </div>
+
+  </div>
+</div>

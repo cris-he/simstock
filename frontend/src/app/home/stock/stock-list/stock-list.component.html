@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="row" style="margin-top:3%">
+    <div class="col-md-11">
+
+      <input [(ngModel)]="search_str" (keyup.enter)="search_btn()" (input)="onSearchChange()" class="form-control mr-sm-2" type="search"
+        placeholder="Search" aria-label="Search">
+    </div>
+    <div class="col-md-1">
+      <button (click)="search_btn()" class="btn btn-outline-primary my-2 my-sm-0">Search</button>
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="container">
+  <div class="row" style="margin-top:3%">
+    <div class="col-md-12" *ngIf="user_ready">
+      <h4 style="margin-top:1%">Cash Available : $ {{user.cash}}</h4>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row" style="margin-top:3%">
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <div *ngIf="!ready && !notfound">
+          <h1>Please enter the stock name in the search bar</h1>
+          <p class="lead">For exmaple: GOOGL</p>
+        </div>
+        <div *ngIf="notfound">
+          <h1>The stock name "{{error_symbol}}" is not found</h1>
+          <p class="lead">Please re-enter the stock name</p>
+          <p class="lead">For exmaple: GOOGL</p>
+
+        </div>
+        <div *ngIf="ready">
+          <h1>{{stock.companyName}} ({{stock.symbol}})</h1>
+          <a href="{{stock.website}}" target="_blank">{{stock.website}}</a>
+          <p class="lead">{{stock.description}}</p>
+          <div class="row" style="margin-top:3%">
+            <div class="col-md-4">
+              <input [(ngModel)]="buy_str" (input)="onBuyChange()" class="form-control mr-sm-2" type="search" placeholder="Enter the purchase amount"
+                aria-label="Search">
+              <p class="has-error" *ngIf="!canbuy">{{error_msg}}</p>
+            </div>
+            <div class="col-md-2">
+              <button (click)="buy_btn()" [disabled]="!canbuy" class="btn btn-outline-primary my-2 my-sm-0">Buy this stock</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngIf="search_str==''">
+  <div class="row">
+    <div class="col-md-12" style="margin-top:3%">
+      <h4 style="margin-top:1%">My Equity
+        <span *ngIf="good_date">(Selling is disabled on weekend or holidays, no daily market data)</span>
+      </h4>
+
+      <div class="table-responsive" style="margin-top:3%">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Worth</th>
+              <th scope="col">Invested</th>
+              <th scope="col">Earned</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of my_equity">
+              <td>{{item.symbol}}</td>
+              <td>{{item.worth}}</td>
+              <td>{{item.invested}}</td>
+              <td>{{item.earned}}</td>
+              <td>
+                <button (click)="sell(item)" [disabled]="good_date" class="btn btn-outline-primary my-2 my-sm-0">Sell</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngIf="ready">
+  <div class="row" style="margin-top:3%">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Day ({{day_date}})</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Month ({{month_date}})</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Year ({{year_date}})</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div style="margin-top:3%;">
+            <canvas *ngIf="!good_date" id="dayChart" height="100"></canvas>
+            <div *ngIf="good_date" class="jumbotron">
+              <div>
+                <h1>Market Closed on {{today_date | date:'yyyy-MM-dd'}}</h1>
+                <p class="lead">It could be weekend or holidays, or market does not open yet (open after 9:30 AM).</p>
+                <p class="lead">Please check the month/year chart</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+          <div style="margin-top:3%">
+            <canvas id="monthChart" height="100"></canvas>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+          <div style="margin-top:3%">
+            <canvas id="yearChart" height="100"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

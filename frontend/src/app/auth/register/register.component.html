@@ -1,0 +1,50 @@
+<div class="form-body">
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="submit()">
+    <h1 class="h1 mb-3 font-weight-normal">SimStock</h1>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <label class="sr-only">Username</label>
+        <input placeholder="Username" type="text" class="form-control" id="username" formControlName="username" [formGroup]="form" />
+        <div class="alert alert-danger" *ngIf="(form.get('username').touched || form.get('username').dirty) && form.get('username').errors">
+          <div *ngIf="form.get('username').errors.required">Please enter your username</div>
+          <div *ngIf="form.get('username').errors.minlength">Please enter a username with at least 3 characters</div>
+        </div>
+      </div>
+      <div class="form-group col-lg-12">
+        <label class="sr-only">Password</label>
+        <input placeholder="Password" type="password" class="form-control" id="password" formControlName="password" [formGroup]="form" />
+        <div class="alert alert-danger" *ngIf="(form.get('password').touched || form.get('password').dirty) && form.get('password').errors">
+          <div *ngIf="form.get('password').errors.required">Please enter your password</div>
+          <div *ngIf="form.get('password').errors.minlength">Please enter a password with at least 6 characters</div>
+        </div>
+      </div>
+      <div class="form-group col-lg-12">
+        <label class="sr-only">Confirm Password</label>
+        <input placeholder="Confirm Password" type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" [formGroup]="form" />
+        <div class="alert alert-danger" *ngIf="(form.controls.confirmPassword.touched || form.controls.confirmPassword.dirty) && form.get('confirmPassword').errors ">
+          <div *ngIf="form.controls.confirmPassword.errors?.required">Please re-enter your password</div>
+          <div *ngIf="form.controls.confirmPassword.errors?.checkPwd">Password not match</div>
+        </div>
+      </div>
+      <div class="form-group col-lg-12">
+        <label class="sr-only">First name</label>
+        <input placeholder="First name" type="text" class="form-control" id="first" formControlName="first" [formGroup]="form" />
+        <div class="alert alert-danger" *ngIf="(form.get('first').touched || form.get('first').dirty) && form.get('first').errors">
+          <div *ngIf="form.get('first').errors.required">Please enter your first name</div>
+        </div>
+      </div>
+      <div class="form-group col-lg-12">
+        <label class="sr-only">Last name</label>
+        <input placeholder="Last name" type="text" class="form-control" id="last" formControlName="last" [formGroup]="form" />
+        <div class="alert alert-danger" *ngIf="(form.get('last').touched || form.get('last').dirty) && form.get('last').errors">
+          <div *ngIf="form.get('last').errors.required">Please enter your last name</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-outline-primary btn-block" [disabled]="!form.valid">Sign Up</button>
+    <p style="margin-top:3%">Already have an account? Plase
+      <a [routerLink]="['/login']">Sign in</a>
+    </p>
+  </form>
+
+</div>

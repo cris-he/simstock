@@ -1,0 +1,16 @@
+<div class="form-body">
+  <form class="form-signin" (ngSubmit)="submit()" #loginForm="ngForm">
+    <h1 class="h1 mb-3 font-weight-normal">SimStock</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input [(ngModel)]='creds.username' type="email" name="username" class="form-control" placeholder="Username" required=""
+      autofocus="">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input [(ngModel)]='creds.password' type="password" name="password" class="form-control" placeholder="Password" required="">
+    <button class="btn btn-lg btn-primary btn-block">Sign in</button>
+    <p style="margin-top:3%">Don't have an account? Plase
+      <a [routerLink]="['/register']">Sign up</a>
+    </p>
+    <p class="mt-5 mb-3 text-muted">© csc309-18s/coolchar</p>
+  </form>
+</div>
