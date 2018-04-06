@@ -1,5 +1,5 @@
 # simstock
-A web app written in Angular (angular 5), Node.js, MongoDB.
+A stock game written in Angular (angular 5), Node.js, MongoDB.
 
 Try the deployed version:
   
